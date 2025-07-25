@@ -3,11 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Red Sheep Agency</title>
+  
+  <!-- SEO Title and Meta Description -->
+  <title>Red Sheep Agency Work | Branding & Creative Projects Portfolio</title>
+  <meta name="description" content="Explore the portfolio of Red Sheep Agency. View branding, web, and creative work crafted for rebellious founders and visionary brands.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://thegalacticmonk.github.io/red-sheep/work.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/red-sheep-favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thegalacticmonk.github.io/red-sheep/work.html">
+  <meta property="og:title" content="Red Sheep Agency Work | Branding & Creative Projects Portfolio">
+  <meta property="og:description" content="Explore the portfolio of Red Sheep Agency. View branding, web media, and creative work crafted for rebellious founders and visionary brands.">
+  <meta property="og:image" content="https://thegalacticmonk.github.io/red-sheep/images/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://thegalacticmonk.github.io/red-sheep/work.html">
+  <meta name="twitter:title" content="Red Sheep Agency Work | Branding & Creative Projects Portfolio">
+  <meta name="twitter:description" content="Explore the portfolio of Red Sheep Agency. View branding, web media, and creative work crafted for rebellious founders and visionary brands.">
+  <meta name="twitter:image" content="https://thegalacticmonk.github.io/red-sheep/images/og-image.png">
+
+  <!-- Breadcrumb Schema (for Work/Portfolio) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://thegalacticmonk.github.io/red-sheep/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Work",
+        "item": "https://thegalacticmonk.github.io/red-sheep/work.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Organization Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Red Sheep Agency",
+    "url": "https://thegalacticmonk.github.io/red-sheep/",
+    "logo": "https://thegalacticmonk.github.io/red-sheep/images/red-sheep-logo-dark.svg",
+    "sameAs": [
+      "https://x.com/YOURHANDLE"
+    ],
+    "description": "Red Sheep Agency is a creative agency for brands and entrepreneurs who want to stand out. We build, launch, and scale original ideas."
+  }
+  </script>
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/mobile-nav.css">
-  <link rel="stylesheet" href="css/background.css"><!-- Your animated bg css -->
+  <link rel="stylesheet" href="css/background.css">
   <link rel="stylesheet" href="css/work.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -41,7 +103,6 @@
       display: block;
       max-width: 100%;
     }
-    /* Hide mobile header on desktop */
     @media (min-width: 901px) {
       .mobile-header { display: none; }
     }
@@ -55,7 +116,7 @@
   <!-- Mobile header with logo -->
   <header class="mobile-header">
     <a href="/red-sheep/" class="mobile-header-logo">
-      <img src="images/red-sheep-logo-dark.svg" alt="Red Sheep Logo">
+      <img src="images/red-sheep-logo-dark.svg" alt="Red Sheep Agency logo">
     </a>
   </header>
 
@@ -84,21 +145,20 @@
     Promise.all([
       fetch('partials/nav.html').then(res => res.text()),
       fetch('partials/mobile-nav.html').then(res => res.text()),
-      fetch('partials/content-work.html').then(res => res.text()) // Add this line!
+      fetch('partials/content-work.html').then(res => res.text())
     ]).then(([desktopNav, mobileNav, mainContent]) => {
       document.getElementById('nav-container').innerHTML = desktopNav;
       document.getElementById('mobile-nav-placeholder').innerHTML = mobileNav;
-      document.getElementById('content-placeholder').innerHTML = mainContent; // And this!
+      document.getElementById('content-placeholder').innerHTML = mainContent;
 
       const script = document.createElement('script');
-  script.src = 'js/work.js';
-  document.body.appendChild(script);
+      script.src = 'js/work.js';
+      document.body.appendChild(script);
 
     }).catch(error => {
       console.error('Error loading navigation or content:', error);
     });
   </script>
-  
   
   <script src="js/mobile-nav.js"></script>
 
@@ -189,8 +249,6 @@ void main () {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
   <!-- Animated background logic -->
- 
   <script src="js/background.js"></script>
- 
 </body>
 </html>

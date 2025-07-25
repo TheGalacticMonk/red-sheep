@@ -3,11 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Red Sheep Agency</title>
+
+  <!-- SEO Title and Description -->
+  <title>About Red Sheep Agency | Who We Are & How We Think</title>
+  <meta name="description" content="Learn about Red Sheep Agency, a creative branding and digital agency for rebels and founders who want to build legendary brands. Meet the team, our vision, and what makes us different.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://thegalacticmonk.github.io/red-sheep/about.html" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/red-sheep-favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thegalacticmonk.github.io/red-sheep/about.html">
+  <meta property="og:title" content="About Red Sheep Agency | Who We Are & How We Think">
+  <meta property="og:description" content="Meet the founders and creative rebels behind Red Sheep Agency. We help truth-seekers and brands stand out and break the mold.">
+  <meta property="og:image" content="https://thegalacticmonk.github.io/red-sheep/images/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://thegalacticmonk.github.io/red-sheep/about.html">
+  <meta name="twitter:title" content="About Red Sheep Agency | Who We Are & How We Think">
+  <meta name="twitter:description" content="Meet the founders and creative rebels behind Red Sheep Agency. We help truth-seekers and brands stand out and break the mold.">
+  <meta name="twitter:image" content="https://thegalacticmonk.github.io/red-sheep/images/og-image.png">
+
+  <!-- Breadcrumb Schema (About) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://thegalacticmonk.github.io/red-sheep/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://thegalacticmonk.github.io/red-sheep/about.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Organization Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Red Sheep Agency",
+    "url": "https://thegalacticmonk.github.io/red-sheep/",
+    "logo": "https://thegalacticmonk.github.io/red-sheep/images/red-sheep-logo-dark.svg",
+    "sameAs": [
+      "https://x.com/YOURHANDLE"
+    ],
+    "description": "Red Sheep Agency is a creative agency for rebels and founders. We help brands break out of the matrix and launch unforgettable ideas."
+  }
+  </script>
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/mobile-nav.css">
-  <link rel="stylesheet" href="css/background.css"><!-- Your animated bg css -->
+  <link rel="stylesheet" href="css/background.css">
   <link rel="stylesheet" href="css/content.css">
   <link rel="stylesheet" href="css/about.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -42,7 +104,6 @@
       display: block;
       max-width: 100%;
     }
-    /* Hide mobile header on desktop */
     @media (min-width: 901px) {
       .mobile-header { display: none; }
     }
@@ -56,7 +117,7 @@
   <!-- Mobile header with logo -->
   <header class="mobile-header">
     <a href="/red-sheep/" class="mobile-header-logo">
-      <img src="images/red-sheep-logo-dark.svg" alt="Red Sheep Logo">
+      <img src="images/red-sheep-logo-dark.svg" alt="Red Sheep Agency logo">
     </a>
   </header>
 
@@ -90,12 +151,11 @@
       document.getElementById('nav-container').innerHTML = desktopNav;
       document.getElementById('mobile-nav-placeholder').innerHTML = mobileNav;
       document.getElementById('content-placeholder').innerHTML = aboutContent;
-      initTerminalAnimation(); // Run the animation after content is loaded
+      initTerminalAnimation && typeof initTerminalAnimation === 'function' && initTerminalAnimation();
     }).catch(error => {
       console.error('Error loading partials:', error);
     });
   </script>
-  
   
   <script src="js/mobile-nav.js"></script>
   <script src="js/about.js"></script>
