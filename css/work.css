@@ -1,0 +1,280 @@
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+:root {
+  --color-text: #332211;
+  --font-primary: "PP Neue Montreal", sans-serif;
+  --padding: 2rem;
+  --grid-gutter: 1rem;
+  --card-size: min(
+    calc((100vh - 6 * var(--padding)) / 3),
+    calc((100vw - 6 * var(--padding)) / 3)
+  );
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+body {
+  /* Remove background-color! */
+  /* background-color: var(--color-bg); */
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: -0.02em;
+  z-index: 0;
+}
+
+/* Remove noise & dust overlays if the site already has its own background layers! */
+/*
+body::before,
+body::after {
+  display: none !important;
+}
+*/
+
+.grid-container {
+  width: calc(3 * var(--card-size) + 2 * var(--grid-gutter));
+  height: calc(3 * var(--card-size) + 2 * var(--grid-gutter));
+  position: relative;
+  margin-top: 3.5rem;
+  /* Remove background here if present */
+}
+
+.card {
+  position: absolute;
+  width: var(--card-size);
+  height: var(--card-size);
+  border-radius: 8px;
+  overflow: hidden;
+  background: none;   /* Remove background */
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  visibility: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.09); /* (Optional) for card pop */
+}
+
+.card-5 {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  visibility: visible;
+  z-index: 10;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: none; /* Ensure no background here either */
+}
+
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.1) 90%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.card p {
+  font-size: 0.825rem;
+  opacity: 1;
+}
+
+.categories {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 200;
+}
+
+.category {
+  color: white;
+  border-radius: 20px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.825rem;
+  opacity: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transform: translateY(20px);
+  visibility: hidden;
+  background: none; /* Remove background, let parent site handle it */
+}
+
+/* If you want the subtle category backgrounds, keep this block,
+   otherwise, remove for total transparency:
+*/
+.category:nth-child(1) { background: rgb(61, 61, 61); }
+.category:nth-child(2) { background: rgb(54, 54, 54); }
+.category:nth-child(3) { background: rgb(46, 46, 46); }
+.category:nth-child(4) { background: rgb(38, 38, 38); }
+.category:nth-child(5) { background: rgb(31, 31, 31); }
+.category:nth-child(6) { background: rgb(23, 23, 23); }
+.category:nth-child(7) { background: rgb(15, 15, 15); }
+.category:nth-child(8) { background: rgb(8, 8, 8); }
+
+.logo {
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 100;
+  text-transform: uppercase;
+  display: flex;
+}
+
+.logo-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.logo .char {
+  display: inline-block;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+  filter: blur(0px);
+}
+
+.logo .spacer {
+  width: 0.5em;
+  display: inline-block;
+}
+
+.interactive-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.mysterious-message {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.75rem;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.grid-container:hover ~ .mysterious-message {
+  opacity: 1;
+}
+
+/* Keep overlay background for modal! */
+.fullscreen-overlay {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.22s cubic-bezier(.4,.1,.22,1);
+  opacity: 0;
+  pointer-events: none;
+}
+.fullscreen-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.fullscreen-overlay img {
+  max-width: 94vw;
+  max-height: 92vh;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+  border-radius: 2.1vw;
+  background: #181818;
+  transition: box-shadow 0.15s;
+}
+.close-fullscreen {
+  position: absolute;
+  top: 3vw;
+  right: 4vw;
+  font-size: 2.5rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  line-height: 1;
+  opacity: 0.76;
+  transition: opacity 0.2s;
+}
+.close-fullscreen:hover { opacity: 1; }
+
+/* --- Responsive Logo --- */
+@media (max-width: 992px) {
+  .logo {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1.5rem;
+    left: 20px; /* Move it a bit from the edge */
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    font-size: 1.25rem;
+    left: 15px;
+  }
+}
+
+/* --- Responsive (unchanged, these don't set card backgrounds) --- */
+@media (max-width: 1200px) { /* ... unchanged ... */ }
+@media (max-width: 992px) { /* ... unchanged ... */ }
+@media (max-width: 768px) { /* ... unchanged ... */ }
+@media (max-width: 576px) { /* ... unchanged ... */ }
+@media (max-width: 600px) {
+  .grid-container {
+    margin-top: 1.2rem; /* or even 0.7rem for tighter spacing */
+  }
+}
+@media (max-width: 600px) {
+  body {
+    align-items: flex-start !important;
+  }
+  .grid-container {
+    margin-top: 1.2rem; /* or whatever you want */
+  }
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Sheep Agency</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/mobile-nav.css">
+  <link rel="stylesheet" href="css/background.css"><!-- Your animated bg css -->
+  <link rel="stylesheet" href="css/content.css">
+  <link rel="stylesheet" href="css/services.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Mobile header with logo */
+    .mobile-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 160px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .mobile-header-logo {
+      min-width: 168px;
+      max-width: 90vw;
+      padding: 0;
+      pointer-events: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 88px;
+    }
+    .mobile-header-logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-width: 100%;
+    }
+    @media (min-width: 901px) {
+      .mobile-header { display: none; }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <!-- ANIMATED BACKGROUND -->
+  <div class="world"></div>
+
+  <!-- Mobile header with logo -->
+  <header class="mobile-header">
+    <a href="/red-sheep/" class="mobile-header-logo">
+      <img src="images/red-sheep-logo-dark.svg" alt="Red Sheep Logo">
+    </a>
+  </header>
+
+  <!-- Dot Grid Hamburger Button -->
+  <label class="switch" id="mobileNavHamburger" aria-label="Menu">
+    <input type="checkbox" id="mobileNavToggle" />
+    <span class="wrapper">
+      <span class="row-horizontal row">
+        <span class="dot"></span>
+        <span class="dot middle-dot-horizontal"></span>
+        <span class="dot"></span>
+      </span>
+      <span class="row-vertical row">
+        <span class="dot"></span>
+        <span class="dot middle-dot"></span>
+        <span class="dot"></span>
+      </span>
+    </span>
+  </label>
+
+  <!-- NAVIGATION CONTAINERS (populated by JS) -->
+  <div id="nav-container"></div>
+  <div id="mobile-nav-placeholder"></div>
+
+  <!-- SERVICES CARDS (static, always visible) -->
+  <div class="center-container">
+    <div class="card">
+      <div class="content">
+        <img src="images/digital-media.svg" alt="Digital Media Icon" width="48" height="48">
+        <div class="card-title">Digital Media</div>
+        <p class="para">
+          Whether you are a business, a blog, podcast, author, filmmaker, or music artist, we help you push the limits of the Matrix and disrupt systems.
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="content">
+        <img src="images/branding.svg" alt="Branding Icon" width="48" height="48">
+        <div class="card-title">Branding</div>
+        <p class="para">
+          Branding is cringe. That's why we focus on ideas that transcend the superficial. So that when people notice your branding, all they will think is: "this is awesome."
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="content">
+        <img src="images/web-development.svg" alt="Web Development Icon" width="48" height="48">
+        <div class="card-title">Web Development</div>
+        <p class="para">
+          Your website should also be an experience. When people visit your site, they should feel like they're entering your world. It's not called a "home page" for nothing!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS, SHADERS, ETC. -->
+  <script>
+    Promise.all([
+      fetch('partials/nav.html').then(res => res.text()),
+      fetch('partials/mobile-nav.html').then(res => res.text())
+    ]).then(([desktopNav, mobileNav]) => {
+      document.getElementById('nav-container').innerHTML = desktopNav;
+      document.getElementById('mobile-nav-placeholder').innerHTML = mobileNav;
+    }).catch(error => {
+      console.error('Error loading partials:', error);
+    });
+  </script>
+  <script src="js/mobile-nav.js"></script>
+
+  <!-- SHADER CODE FOR BACKGROUND -->
+  <script type="x-shader/x-vertex" id="vertexShader">
+attribute vec3 position;
+attribute vec2 uv;
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position, 1.0);
+}
+  </script>
+  <script type="x-shader/x-fragment" id="fragmentShader">
+precision highp float;
+
+uniform float uTime;
+uniform vec2 uMousePosition;
+uniform float uDensity;
+uniform float uDisplacement;
+uniform vec3 uColor1;
+uniform vec3 uColor2;
+uniform vec3 uColor3;
+
+varying vec2 vUv;
+
+float mod289(float x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
+vec4 mod289(vec4 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
+vec4 perm(vec4 x){return mod289(((x * 34.0) + 1.0) * x);}
+vec2 fade(vec2 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
+float cnoise(vec2 P){
+  vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+  vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+  Pi = mod(Pi, 289.0);
+  vec4 ix = Pi.xzxz;
+  vec4 iy = Pi.yyww;
+  vec4 fx = Pf.xzxz;
+  vec4 fy = Pf.yyww;
+  vec4 i = perm(perm(ix) + iy);
+  vec4 gx = 2.0 * fract(i * 0.0243902439) - 1.0;
+  vec4 gy = abs(gx) - 0.5;
+  vec4 tx = floor(gx + 0.5);
+  gx = gx - tx;
+  vec2 g00 = vec2(gx.x,gy.x);
+  vec2 g10 = vec2(gx.y,gy.y);
+  vec2 g01 = vec2(gx.z,gy.z);
+  vec2 g11 = vec2(gx.w,gy.w);
+  vec4 norm = 1.79284291400159 - 0.85373472095314 *
+    vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11));
+  g00 *= norm.x;
+  g01 *= norm.y;
+  g10 *= norm.z;
+  g11 *= norm.w;
+  float n00 = dot(g00, vec2(fx.x, fy.x));
+  float n10 = dot(g10, vec2(fx.y, fy.y));
+  float n01 = dot(g01, vec2(fx.z, fy.z));
+  float n11 = dot(g11, vec2(fx.w, fy.w));
+  vec2 fade_xy = fade(Pf.xy);
+  vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+  float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
+  return 2.3 * n_xy;
+}
+
+void main () {
+  float mouseDistance = length(vUv - uMousePosition);
+  float t = uTime * .005;
+  float elevation =  vUv.y * uDensity * 30.0;
+  float shadow = smoothstep(0.0, .3 + sin(t * 5.0 * 3.14) * .1 , mouseDistance);
+  elevation += shadow * 5.0;
+  float displacement = cnoise( vec2( t + vUv.y * 2.0, t + vUv.x * 3.0 )) * uDisplacement * 3.0 ;
+  elevation += displacement * 4.0;
+  elevation *= 2.0 + cnoise( vec2( t + vUv.y * 1.0, t + .5)) * 2.0 ;
+  float light = .9 + fract(elevation) ;
+  light *= .9 + (1.0 - (displacement * displacement)) * .1;
+  elevation = floor(elevation);
+
+  // More RED, less white:
+  if (light < 0.8) {
+    float t = smoothstep(0.0, 0.8, light);
+    gl_FragColor = vec4(mix(uColor2, uColor1, t), 1.0);
+  } else {
+    float t = smoothstep(0.8, 1.0, light);
+    gl_FragColor = vec4(mix(uColor1, uColor3, t), 1.0);
+  }
+}
+  </script>
+  <!-- Animated background logic -->
+  <script src="js/background.js"></script>
+</body>
+</html>

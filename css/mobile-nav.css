@@ -1,0 +1,239 @@
+.mobile-header-logo.faded {
+  opacity: 0.26;       /* or any value you like */
+  transition: opacity 0.22s;
+}
+
+
+/* Overlay background */
+.mobile-nav-overlay {
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #2a232c;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-nav-overlay[aria-hidden="false"] {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Overlay content */
+.mobile-nav-content {
+  width: 100%;
+  max-width: 340px;
+  margin: 0auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 88vh;
+  position: relative;
+}
+.mobile-nav-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 168px;
+  max-width: 340px;
+  margin: 55px auto 22px auto;
+  padding: 1.05em 2.8em;
+  box-sizing: border-box;
+  transition: width 0.18s;
+}
+.mobile-nav-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 340px;
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 2.3rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.18s;
+}
+.mobile-nav-close:hover { opacity: 1; }
+
+/* --- DOT GRID HAMBURGER --- */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  display: none;
+}
+.switch {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 2500;
+  background: none;
+  border: none;
+}
+.wrapper {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s;
+}
+.row {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.row-bottom {
+  align-items: flex-end;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border: 2px solid #000; /* White for dark background */
+  border-radius: 50%;
+  transition: border-color 0.18s;
+}
+.row-horizontal {
+  position: absolute;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+.row-vertical {
+  position: absolute;
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+
+.switch:hover .wrapper .row-horizontal {
+  width: 100px;
+}
+.switch:hover .wrapper .row-vertical {
+  height: 100px;
+}
+.switch:hover .wrapper .row-vertical .middle-dot {
+  border-radius: 5px;
+  height: 35px;
+}
+.switch:hover .wrapper .row-horizontal .middle-dot-horizontal {
+  border-radius: 5px;
+  width: 35px;
+}
+.switch input:checked + .wrapper {
+  transform: rotate(45deg) scale(1.2);
+}
+.switch input:checked + .wrapper .row-vertical {
+  height: 100px;
+}
+.switch input:checked + .wrapper .row-horizontal {
+  width: 100px;
+}
+.switch input:checked + .wrapper .row-vertical .middle-dot {
+  border-radius: 5px;
+  height: 35px;
+}
+.switch input:checked + .wrapper .row-horizontal .middle-dot-horizontal {
+  border-radius: 5px;
+  width: 35px;
+}
+.switch input:checked + .wrapper .dot {
+  border-color: #eb2627;           /* Brand red when open */
+}
+
+/* Only show hamburger on mobile */
+@media (max-width: 900px) {
+  .switch { display: flex; }
+  .main-nav { display: none !important; }
+}
+@media (min-width: 901px) {
+  .mobile-nav-overlay { display: none !important; }
+  .switch { display: none !important; }
+}
+
+/* Nav links */
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+  align-items: center;
+  margin: 0 0 44px 0;
+  width: 100%;
+}
+.mobile-nav-link {
+  text-align: center;
+  color: #fff;
+  background: none;
+  border: none;
+  border-radius: 9px;
+  font-size: 1.16rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1em 0;
+  transition: background 0.13s, color 0.13s;
+  position: relative;
+  width: 100%;
+}
+.mobile-nav-link:active,
+.mobile-nav-link:focus {
+  background: rgba(255,255,255,0.10);
+  color: #0284c7;
+}
+.mobile-nav-links .nav-link span.nav-label {
+  padding: 0.95em 2.4em;
+  min-width: 140px;
+  font-size: 1.18rem;
+  text-align: center;
+}
+
+/* Footer (Twitter link) */
+.mobile-nav-footer {
+  margin-top: auto;
+  padding-bottom: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.twitter-link {
+  color: #1da1f2;
+  transition: color 0.18s;
+  font-size: 1.5rem;
+}
+.twitter-link:hover { color: #fff; }

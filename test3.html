@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Skeleton</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Fonts: Space Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/services.css">
+  <style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f6f6f6;
+    }
+    .center-container {
+      display: flex;
+      gap: 36px;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-title {
+      margin-top: 12px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 1.44rem;
+      letter-spacing: 0.02em;
+      color: #202040;
+      text-align: center;
+      /* Optionally, reinforce the font */
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    /* Optional: stack vertically on mobile */
+    @media (max-width: 900px) {
+      .center-container {
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="center-container">
+    <div class="card">
+      <div class="content">
+        <img src="images/digital-media.svg" alt="Digital Media Icon" width="48" height="48">
+        <div class="card-title">Digital Media</div>
+        <p class="para">
+          Whether you are a business, a blog, podcast, author, filmmaker, or music artist, we help you push the limits of the Matrix and disrupt systems.
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="content">
+        <img src="images/branding.svg" alt="Branding Icon" width="48" height="48">
+        <div class="card-title">Branding</div>
+        <p class="para">
+          Branding is cringe. That's why we focus on ideas that transcend the superficial. So that when people notice your branding, all they will think is: "this is awesome."
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="content">
+        <img src="images/web-development.svg" alt="Web Development Icon" width="48" height="48">
+        <div class="card-title">Web Development</div>
+        <p class="para">
+          Your website should also be an experience. When people visit your site, they should feel like they're entering your world. It's not called a "home page" for nothing!
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

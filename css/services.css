@@ -1,0 +1,147 @@
+.center-container,
+.center-container * {
+  font-family: 'Space Grotesk', 'Inter', Arial, sans-serif !important;
+}
+
+.card-title {
+  font-size: 1.36rem;     /* Adjust to your desired size */
+  font-weight: 700;       /* Make it bolder if needed */
+  letter-spacing: -0.01em;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 0.25em;  /* Optional: adds space below */
+}
+
+
+.center-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  border-radius: 24px;
+  line-height: 1.6;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 36px;
+  border-radius: 22px;
+  color: #ffffff;
+  overflow: hidden;
+  background: #eb2627;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content::before {
+  position: absolute;
+  content: "";
+  top: -4%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%);
+  background: #ced8ff;
+  z-index: -1;
+  transform-origin: bottom;
+
+  border-radius: inherit;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content::after {
+  position: absolute;
+  content: "";
+  top: -8%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%);
+  background: #e7ecff;
+  z-index: -2;
+  transform-origin: bottom;
+  border-radius: inherit;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content svg {
+  width: 48px;
+  height: 48px;
+}
+
+.content .para {
+  z-index: 1;
+  opacity: 1;
+  font-size: 18px;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content .link {
+  z-index: 1;
+  color: #fea000;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 16px;
+  transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.content .link:hover {
+  text-decoration: underline;
+}
+
+.card:hover {
+  transform: translate(0px, -16px);
+}
+
+.card:hover .content::before {
+  rotate: -8deg;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card:hover .content::after {
+  rotate: 8deg;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.center-container {
+  gap: 36px;            /* space between cards desktop */
+}
+
+@media (max-width: 900px) {
+  .center-container {
+    flex-direction: column;
+    gap: 22px;         /* space between cards on mobile */
+    align-items: stretch;  /* full width on mobile */
+    padding: 0 0.7rem;     /* small side padding mobile */
+  }
+  .card {
+    width: 100%;
+    max-width: 440px;  /* optional, keep card max size */
+    margin: 0 auto;    /* center cards horizontally */
+  }
+}
+
+@media (max-width: 900px) {
+  .center-container {
+    flex-direction: column;
+    gap: 22px;
+    align-items: stretch;
+    padding: 0 0.7rem;
+    margin-top: 222px;  /* <-- Add this line for top margin on mobile */
+  }
+}
