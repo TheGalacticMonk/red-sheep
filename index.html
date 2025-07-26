@@ -227,5 +227,23 @@ void main () {
   </script>
   <!-- Animated background logic -->
   <script src="js/background.js"></script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Only do this on mobile (or small screens)
+  if (window.innerWidth <= 600) {
+    var header = document.querySelector('.mobile-header');
+    var hero = document.querySelector('.home-hero');
+    if (header && hero) {
+      // Measure the header's height (including padding, etc.)
+      var headerHeight = header.offsetHeight;
+      // Set the hero's margin-top to header height
+      hero.style.marginTop = headerHeight + 'px';
+    }
+  }
+});
+</script>
+
+
 </body>
 </html>
