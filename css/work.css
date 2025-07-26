@@ -278,3 +278,15 @@ body::after {
     margin-top: 1.2rem; /* or whatever you want */
   }
 }
+@media (max-width: 700px) {
+  :root {
+    --card-size: max(88px, calc((100vw - 2.2rem) / 3));
+    /* Adjust 2.2rem for your mobile side padding if needed */
+  }
+  .grid-container {
+    width: calc(3 * var(--card-size) + 2 * var(--grid-gutter));
+    height: calc(3 * var(--card-size) + 2 * var(--grid-gutter));
+    min-width: 0;  /* prevents overflow on very narrow screens */
+    min-height: 0;
+  }
+}
