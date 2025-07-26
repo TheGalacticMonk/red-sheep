@@ -270,7 +270,7 @@ body::after {
     align-items: flex-start !important;
   }
   .grid-container {
-    margin-top: 2.0rem; /* or whatever you want */
+    margin-top: 2.5rem; /* or whatever you want */
   }
 }
 @media (max-width: 700px) {
