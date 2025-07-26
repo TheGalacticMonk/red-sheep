@@ -266,16 +266,11 @@ body::after {
 @media (max-width: 768px) { /* ... unchanged ... */ }
 @media (max-width: 576px) { /* ... unchanged ... */ }
 @media (max-width: 600px) {
-  .grid-container {
-    margin-top: 1.2rem; /* or even 0.7rem for tighter spacing */
-  }
-}
-@media (max-width: 600px) {
   body {
     align-items: flex-start !important;
   }
   .grid-container {
-    margin-top: 1.2rem; /* or whatever you want */
+    margin-top: 2.0rem; /* or whatever you want */
   }
 }
 @media (max-width: 700px) {
