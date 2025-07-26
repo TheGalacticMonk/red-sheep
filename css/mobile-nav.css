@@ -32,7 +32,7 @@
 .mobile-nav-content {
   width: 100%;
   max-width: 340px;
-  margin: 0auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
